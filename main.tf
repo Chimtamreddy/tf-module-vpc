@@ -18,7 +18,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_route" "igw" {
-  route_table_id            = module.subnets["public"]["route_table_ids"]
+  for_each = module.subnets["public"]["route_table_ids"]
+  route_table_id            = "aws_route_table.testing.id"
   destination_cidr_block    = "10.0.1.0/22"
   vpc_peering_connection_id = "pcx-45ff3dc1"
 }
