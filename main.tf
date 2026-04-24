@@ -12,3 +12,7 @@ module "subnets" {
 
 
 }
+
+output "subnets" {
+  value = module.subnets
+}
