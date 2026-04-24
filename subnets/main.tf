@@ -1,8 +1,10 @@
-# resource "aws_subnet" "main" {
-#   vpc_id     = var.vpc
-#   cidr_block = "10.0.1.0/24"
-#
-#   tags = {
-#     Name = "Main"
-#   }
-# }
+resource "aws_subnet" "main" {
+  for_each = var.subnets
+  vpc_id     = var.vpc_id
+  cidr_block = each.value["cidr"]
+  availability_zone = each.value["az"]
+
+}
+
+variable "vpc_id" {}
+variable "subnets" {}
